@@ -20,8 +20,9 @@ int main (int argc, char *argv[]) {
   }
 
   string line;
+  string tag;
   size_t tag_begin; 
-  size_t tag_end;
+  size_t tag_length;
   while(getline(file, line)) { // Enquanto tiver proxima linha, atribue para line
     for(size_t i = 0; i < line.size(); i++) { // Para caracter na linha, faça
       if(line[i] == LEFT_BRACKET) { // Se achar bracket esquerdo, guarda a posicao
@@ -29,9 +30,12 @@ int main (int argc, char *argv[]) {
       }
 
       if(line[i] == RIGHT_BRACKET) { // se for bracket direto, monta substring de tag
-        tag_end = i + 1;
-        string tag = line.substr(tag_begin, tag_end - tag_begin);
-        printf("%s | Inicio: %zu - Fim: %zu \n\n", tag.c_str(), tag_begin, tag_end);
+        tag_length = i + 1 - tag_begin;
+        tag = line.substr(tag_begin, tag_length);
+
+        if(tag[1] == SLASH) { // Se o segundo caracter da tag for '/' então é uma tag de fechamento
+          // desempilhar
+        }
       }
     }
   }
