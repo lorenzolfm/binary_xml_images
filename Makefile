@@ -43,9 +43,27 @@ CC = g++
 # Compiler flags
 C_FLAGS = -g -Werror
 
+# Linker flags
+LD_FLAGS = -L $(GTEST_LIB) -l $(GTEST) -l pthread
+
 # Gtest stuff
 GTEST_LIB = /usr/lib/
 GTEST = gtest
 
-# Linker flags
-LD_FLAGS = -L $(GTEST_LIB) -l $(GTEST) -l pthread
+# Project directories
+INCLUDE_DIR = include
+SRCS_DIR = src
+TESTS_DIR = tests
+BUILD_DIR = build
+
+BUILD_OUTPUT = -o $(BUILD_DIR)
+# Compile and link the whole project
+all: $(BUILD_DIR)/main.o
+	$(CC) $(C_FLAGS) $? $(BUILD_OUTPUT)/main
+
+build/main.o: $(SRCS_DIR)/main.cpp
+	mkdir -p build
+	$(CC) -c $(C_FLAGS) $(SRCS_DIR)/$(*F).cpp -o $@
+
+run:
+	./$(BUILD_DIR)/main
