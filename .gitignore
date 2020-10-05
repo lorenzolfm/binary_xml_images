@@ -1,2 +1,8 @@
-*.out
+# Ignore build directories
+**/build
+
+# Ignore documentation directory
+docs/*
+
+# Ignore assets directory
 assets/
