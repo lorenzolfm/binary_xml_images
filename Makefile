@@ -67,7 +67,7 @@ build/main.o: $(SRCS_DIR)/main.cpp
 	$(CC) -c $(C_FLAGS) $(SRCS_DIR)/$(*F).cpp -o $@
 
 run:
-	./$(BUILD_DIR)/main
+	./$(BUILD_DIR)/main dataset01.xml
 
 test: $(BUILD_DIR)/test_xml_parser.o
 	$(CC) $(C_FLAGS) $? $(LD_FLAGS) $(BUILD_OUTPUT)/TestXMLParser
