@@ -57,6 +57,7 @@ TESTS_DIR = tests
 BUILD_DIR = build
 
 BUILD_OUTPUT = -o $(BUILD_DIR)
+
 # Compile and link the whole project
 all: $(BUILD_DIR)/main.o
 	$(CC) $(C_FLAGS) $? $(BUILD_OUTPUT)/main
@@ -67,3 +68,11 @@ build/main.o: $(SRCS_DIR)/main.cpp
 
 run:
 	./$(BUILD_DIR)/main
+
+test: $(BUILD_DIR)/test_xml_parser.o
+	$(CC) $(C_FLAGS) $? $(LD_FLAGS) $(BUILD_OUTPUT)/TestXMLParser
+	./$(BUILD_DIR)/TestXMLParser
+
+build/test_xml_parser.o: $(TESTS_DIR)/test_xml_parser.cpp
+	mkdir -p $(BUILD_DIR)
+	$(CC) -c $(TESTS_DIR)/$(*F).cpp -o $@
