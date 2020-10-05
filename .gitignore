@@ -3,3 +3,6 @@
 
 # Ignore documentation directory
 docs/*
+
+# Ignore assets directory
+assets/
