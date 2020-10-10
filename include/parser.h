@@ -1,8 +1,8 @@
 #ifndef PARSER_H
-#include "stdio.h"
-#include "string.h"
-#include "fstream"
 #include "linked_list.h"
+#include <stdio.h>
+#include <string.h>
+#include <fstream>
 
 class Parser {
   public:
