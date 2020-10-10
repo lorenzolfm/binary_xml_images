@@ -1,4 +1,4 @@
-#include "./includes/linked_list.h"
+#include "linked_list.h"
 
 template<typename T>
 structures::LinkedList<T>::LinkedList() {
@@ -170,3 +170,5 @@ template <typename T>
 std::size_t structures::LinkedList<T>::size() const {
   return size_;
 }
+
+template class structures::LinkedList<std::string>;
