@@ -58,13 +58,23 @@ BUILD_DIR = build
 
 BUILD_OUTPUT = -o $(BUILD_DIR)
 
+COMPILE_DEPS = $(CC) -c $(C_FLAGS) $(SRCS_DIR)/$(*F).cpp -o $@
+
 # Compile and link the whole project
-all: $(BUILD_DIR)/main.o
+all: $(BUILD_DIR)/linked_list.o $(BUILD_DIR)/parser.o $(BUILD_DIR)/main.o
 	$(CC) $(C_FLAGS) $? $(BUILD_OUTPUT)/main
+
+build/parser.o: $(SRCS_DIR)/parser.cpp $(INCLUDE_DIR)/parser.h
+	mkdir -p build
+	$(CC) -c $(SRCS_DIR)/$(*F).cpp -I $(INCLUDE_DIR) -o $@
+
+build/linked_list.o: $(SRCS_DIR)/linked_list.cpp $(INCLUDE_DIR)/linked_list.h
+	mkdir -p build
+	$(CC) -c $(SRCS_DIR)/$(*F).cpp -I $(INCLUDE_DIR) -o $@
 
 build/main.o: $(SRCS_DIR)/main.cpp
 	mkdir -p build
-	$(CC) -c $(C_FLAGS) $(SRCS_DIR)/$(*F).cpp -o $@
+	$(CC) -c $(SRCS_DIR)/$(*F).cpp -I $(INCLUDE_DIR) -o $@
 
 run:
 	./$(BUILD_DIR)/main dataset01.xml
