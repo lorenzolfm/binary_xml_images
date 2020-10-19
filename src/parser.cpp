@@ -24,15 +24,14 @@ bool Parser::parse_file() {
         tag_length = i + 1 - tag_begin;
         tag = line.substr(tag_begin, tag_length);
 
-        printf("%s", tag.c_str());
         if (tag[1] == SLASH) {
           std::string last_tag = linked_list.pop_back();
+          match(last_tag, tag);
 
-
+        } else {
+          linked_list.push_back(tag);
         }
-      } else {
-        linked_list.push_back(tag);
-      }
+      } 
     }
   }
 
@@ -44,6 +43,23 @@ bool Parser::parse_file() {
 }
 
 bool Parser::match(std::string opening_tag, std::string closing_tag) {
-  // retrive the content of each tag and compare
+  std::string o = opening_tag.substr(1, opening_tag.length() - 2);
+  std::string c = closing_tag.substr(2, opening_tag.length() - 2);
+
+  bool match = o.compare(c);
+
+  printf("Match? %d %s %s \n", match, o.c_str(), c.c_str());
+
+   /* retrive the content of each tag and compare */
   return true; // Avoiding compiler warning
 }
+
+/* 0 1 2 3 */
+/* < / p > */ 
+/* Length = 4 */
+
+
+
+
+
+

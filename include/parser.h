@@ -11,6 +11,8 @@ class Parser {
     bool parse_file();
     //! Checks if a opening_tag matches a closing_tag
     bool match(std::string opening_tag, std::string closing_tag);
+    //! Return the only the tag name
+    std::string getTagName(std::string);
 
   private:
       std::ifstream &file_;

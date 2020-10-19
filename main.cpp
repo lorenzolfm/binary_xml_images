@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <fstream>
+#include "include/parser.h"
 
 using namespace std;
 static char BASE_PATH[] = "assets/";
@@ -14,6 +15,10 @@ int main (int argc, char *argv[]) {
     printf("ERROR: Unable to open file %s", full_path);
     exit(1);
   }
+
+  Parser parser(file);
+
+  parser.parse_file();
 
   return 0;
 }
