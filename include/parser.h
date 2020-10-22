@@ -1,5 +1,5 @@
 #ifndef PARSER_H
-#include "linked_list.h"
+#include "linked_stack.h"
 #include <stdio.h>
 #include <string.h>
 #include <fstream>
