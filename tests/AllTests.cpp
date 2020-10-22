@@ -1,7 +1,10 @@
 #include "gtest/gtest.h"
+#include <fstream>
 
 #include "parser.h"
 #include "linked_stack.h"
+
+
 
 int main(int argc, char* argv[]) {
   std::srand(std::time(NULL));
@@ -14,15 +17,13 @@ int main(int argc, char* argv[]) {
 
 class ParserTest : public ::testing:: Test {
   protected:
+  std::ifstream file{"assets/dataset01.xml"};
+  Parser parser{file};
+
 };
 
 TEST_F(ParserTest, ParseFileReturnsTrueWhenValidXML) {
-  std::ifstream file("test.txt");
-
-  //if(!file.is_open()) {
-    //printf("ERROR: Unable to open file\n");
-    //exit(1);
-  //}
+  ASSERT_TRUE(parser.parse_file());
 }
 
 class LinkedStackTest : public ::testing::Test {
