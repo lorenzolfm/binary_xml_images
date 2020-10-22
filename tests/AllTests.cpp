@@ -1,10 +1,8 @@
-#include "gtest/gtest.h"
 #include <fstream>
 
-#include "parser.h"
+#include "gtest/gtest.h"
 #include "linked_stack.h"
-
-
+#include "parser.h"
 
 int main(int argc, char* argv[]) {
   std::srand(std::time(NULL));
@@ -14,16 +12,33 @@ int main(int argc, char* argv[]) {
   return RUN_ALL_TESTS();
 }
 
+class ParserTest : public ::testing::Test {
+ protected:
+  std::ifstream file1{"assets/dataset01.xml"};
+  std::ifstream file4{"assets/dataset04.xml"};
+  std::ifstream file6{"assets/dataset06.xml"};
+  Parser parser1{file1};
+  Parser parser4{file4};
+  Parser parser6{file6};
 
-class ParserTest : public ::testing:: Test {
-  protected:
-  std::ifstream file{"assets/dataset01.xml"};
-  Parser parser{file};
-
+  std::ifstream file2{"assets/dataset02.xml"};
+  std::ifstream file3{"assets/dataset03.xml"};
+  std::ifstream file5{"assets/dataset05.xml"};
+  Parser parser2{file2};
+  Parser parser3{file3};
+  Parser parser5{file5};
 };
 
 TEST_F(ParserTest, ParseFileReturnsTrueWhenValidXML) {
-  ASSERT_TRUE(parser.parse_file());
+  ASSERT_TRUE(parser1.parse_file());
+  ASSERT_TRUE(parser4.parse_file());
+  ASSERT_TRUE(parser6.parse_file());
+}
+
+TEST_F(ParserTest, ParseFileReturnsFalseWhenInvalidXML) {
+  ASSERT_FALSE(parser2.parse_file());
+  ASSERT_FALSE(parser3.parse_file());
+  ASSERT_FALSE(parser5.parse_file());
 }
 
 class LinkedStackTest : public ::testing::Test {
