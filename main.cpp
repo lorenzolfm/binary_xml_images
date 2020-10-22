@@ -2,6 +2,7 @@
 #include <string.h>
 #include <fstream>
 #include "include/parser.h"
+#include <stdexcept>
 
 using namespace std;
 static char BASE_PATH[] = "assets/";
@@ -18,7 +19,10 @@ int main (int argc, char *argv[]) {
 
   Parser parser(file);
 
-  parser.parse_file();
+  bool valid = parser.parse_file();
+
+  if (!valid) printf("Not valid");
+  else printf("Valid");
 
   return 0;
 }

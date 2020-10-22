@@ -1,7 +1,9 @@
-#include "parser.h"
+#include <parser.h>
 #include <string.h>
 #include <stdio.h>
 #include <fstream>
+#include <regex>
+#include <stdexcept>
 
 static const char LEFT_BRACKET = '<';
 static const char RIGHT_BRACKET = '>';
@@ -26,8 +28,8 @@ bool Parser::parse_file() {
 
         if (tag[1] == SLASH) {
           std::string last_tag = linked_list.pop_back();
-          match(last_tag, tag);
-
+          if(!match(last_tag, tag))
+            return false;
         } else {
           linked_list.push_back(tag);
         }
@@ -43,15 +45,11 @@ bool Parser::parse_file() {
 }
 
 bool Parser::match(std::string opening_tag, std::string closing_tag) {
-  std::string o = opening_tag.substr(1, opening_tag.length() - 2);
-  std::string c = closing_tag.substr(2, opening_tag.length() - 2);
+  std::regex reg ("\\W");
+  bool match = std::regex_replace(opening_tag, reg, "")
+    .compare(std::regex_replace(closing_tag, reg, ""));
 
-  bool match = o.compare(c);
-
-  printf("Match? %d %s %s \n", match, o.c_str(), c.c_str());
-
-   /* retrive the content of each tag and compare */
-  return true; // Avoiding compiler warning
+  return match == 0;
 }
 
 /* 0 1 2 3 */
