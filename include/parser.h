@@ -14,7 +14,7 @@ class Parser {
 
   private:
       std::ifstream &file_;
-      structures::LinkedList<std::string> linked_list;
+      structures::LinkedStack<std::string> linked_stack;
 };
 
 #endif
