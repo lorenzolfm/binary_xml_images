@@ -52,12 +52,3 @@ bool Parser::match(std::string opening_tag, std::string closing_tag) {
   return match == 0;
 }
 
-/* 0 1 2 3 */
-/* < / p > */ 
-/* Length = 4 */
-
-
-
-
-
-
