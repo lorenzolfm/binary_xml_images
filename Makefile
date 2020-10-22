@@ -63,7 +63,7 @@ all : $(OBJS)
 	$(CC) main.cpp $(SRCS) -I $(INCLUDE_DIR) -o $(BUILD_DIR)/$(PROJECT_NAME)
 
 run : all
-	./$(BUILD_DIR)/$(PROJECT_NAME) dataset01.xml
+	./$(BUILD_DIR)/$(PROJECT_NAME) dataset03.xml
 
 # Doxygen support
 DOCS_OUT_DIR = docs
