@@ -1,13 +1,38 @@
 #include "gtest/gtest.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+#include <string.h>
+#include <fstream>
+#include <string.h>
 
+#include "parser.h"
 #include "linked_stack.h"
+
+
+static char BASE_PATH[] = "assets/";
+static char file_name[] = "test.xml";
 
 int main(int argc, char* argv[]) {
   std::srand(std::time(NULL));
   ::testing::InitGoogleTest(&argc, argv);
   ::testing::FLAGS_gtest_death_test_style = "fast";
+
+  char * full_path = strcat(BASE_PATH, file_name);
+  std::ifstream file(full_path);
+
+  Parser parser(file);
+
   return RUN_ALL_TESTS();
+}
+
+
+class ParserTest : public ::testing:: Test {
+  protected:
+};
+
+TEST_F(ParserTest, Check) {
+  ASSERT_TRUE(true);
 }
 
 class LinkedStackTest : public ::testing::Test {
