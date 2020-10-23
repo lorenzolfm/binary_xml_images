@@ -27,17 +27,17 @@ bool Parser::parse_file() {
         tag = line.substr(tag_begin, tag_length);
 
         if (tag[1] == SLASH) {
-          std::string last_tag = linked_list.pop_back();
+          std::string last_tag = linked_stack.pop();
           if(!match(last_tag, tag))
             return false;
         } else {
-          linked_list.push_back(tag);
+          linked_stack.push(tag);
         }
-      } 
+      }
     }
   }
 
-  if (!linked_list.empty()) {
+  if (!linked_stack.empty()) {
     return false;
   }
 
@@ -51,4 +51,3 @@ bool Parser::match(std::string opening_tag, std::string closing_tag) {
 
   return match == 0;
 }
-
