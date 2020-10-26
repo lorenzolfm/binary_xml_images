@@ -14,6 +14,9 @@ class Parser {
   bool match(std::string opening_tag, std::string closing_tag);
 
  private:
+  //! Check if content_at_index is equal to tag_element
+  bool isTagElement(const char& content_at_index, const char& tag_element);
+
   std::string content_;
   structures::LinkedStack<std::string> linked_stack;
 };
