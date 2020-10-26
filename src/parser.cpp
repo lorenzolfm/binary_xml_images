@@ -1,3 +1,4 @@
+#include <iostream>
 #include <parser.h>
 #include <string.h>
 #include <stdio.h>
@@ -37,17 +38,16 @@ bool Parser::parse_file() {
     }
   }
 
-  if (!linked_stack.empty()) {
-    return false;
-  }
-
-  return true;
+  return linked_stack.empty();
 }
 
 bool Parser::match(std::string opening_tag, std::string closing_tag) {
   std::regex reg ("\\W");
-  bool match = std::regex_replace(opening_tag, reg, "")
-    .compare(std::regex_replace(closing_tag, reg, ""));
+
+  std::string opening_tag_text = std::regex_replace(opening_tag, reg, "");
+  std::string closing_tag_text = std::regex_replace(closing_tag, reg, "");
+
+  bool match = opening_tag_text.compare(closing_tag_text);
 
   return match == 0;
 }
