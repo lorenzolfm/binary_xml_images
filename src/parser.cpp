@@ -13,6 +13,7 @@ static const char SLASH = '/';
 
 Parser::Parser(std::string content) : content_(content) {}
 
+
 bool Parser::parse_file() {
   std::string tag;
   std::size_t tag_begin;
@@ -20,15 +21,17 @@ bool Parser::parse_file() {
 
   auto index = 0u;
   while (index < content_.length()) {
-    if (content_[index] == LEFT_BRACKET) {
+    char content = content_[index];
+
+    if (isTagElement(content, LEFT_BRACKET)) {
       tag_begin = index;
     }
 
-    if (content_[index] == RIGHT_BRACKET) {
+    if (isTagElement(content, RIGHT_BRACKET)) {
       tag_length = index + 1 - tag_begin;
       tag = content_.substr(tag_begin, tag_length);
 
-      if (tag[1] == SLASH) {
+      if (isTagElement(tag[1], SLASH)) {
         std::string last_tag = linked_stack.pop();
         if (!match(tag, last_tag)) {
           return false;
@@ -52,4 +55,8 @@ bool Parser::match(std::string opening_tag, std::string closing_tag) {
   bool match = opening_tag_text.compare(closing_tag_text);
 
   return match == 0;
+}
+
+bool Parser::isTagElement(const char& content_at_index, const char& tag_element) {
+  return content_at_index == tag_element;
 }
