@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <fstream>
+#include <sstream>
 #include "include/parser.h"
 #include <stdexcept>
 
@@ -17,7 +18,11 @@ int main (int argc, char *argv[]) {
     exit(1);
   }
 
-  Parser parser(file);
+  stringstream buffer;
+  buffer << file.rdbuf();
+  file.close();
+
+  Parser parser(buffer.str());
 
   bool valid = parser.parse_file();
 
