@@ -41,6 +41,15 @@ TEST_F(ParserTest, ParseFileReturnsFalseWhenInvalidXML) {
   ASSERT_FALSE(parser5.parse_file());
 }
 
+TEST_F(ParserTest, MatchReturnsTrueWhenMatches) {
+  ASSERT_TRUE(parser1.match("<oi>", "</oi>"));
+  ASSERT_TRUE(parser1.match("<tchau>", "</tchau>"));
+}
+
+TEST_F(ParserTest, MatchReturnsFalseWhenDontMatch) {
+  ASSERT_FALSE(parser1.match("<oi>", "</io>"));
+}
+
 class LinkedStackTest : public ::testing::Test {
  protected:
   structures::LinkedStack<int> stack{};
