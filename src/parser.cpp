@@ -16,7 +16,6 @@ Parser::Parser(std::string content) : content_(content) {}
 bool Parser::parse_file() {
   std::string tag;
   std::size_t tag_begin;
-  std::size_t tag_length;
 
   auto index = 0u;
   char content;
