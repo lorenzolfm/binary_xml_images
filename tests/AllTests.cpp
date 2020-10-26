@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <string.h>
+
 #include <fstream>
+#include <sstream>
 
 #include "gtest/gtest.h"
 #include "linked_stack.h"
@@ -14,19 +18,21 @@ int main(int argc, char* argv[]) {
 
 class ParserTest : public ::testing::Test {
  protected:
-  std::ifstream file1{"assets/dataset01.xml"};
-  std::ifstream file4{"assets/dataset04.xml"};
-  std::ifstream file6{"assets/dataset06.xml"};
-  Parser parser1{file1};
-  Parser parser4{file4};
-  Parser parser6{file6};
+  std::string setup(std::string path) {
+    std::stringstream buffer;
+    std::ifstream file(path);
+    buffer << file.rdbuf();
+    file.close();
 
-  std::ifstream file2{"assets/dataset02.xml"};
-  std::ifstream file3{"assets/dataset03.xml"};
-  std::ifstream file5{"assets/dataset05.xml"};
-  Parser parser2{file2};
-  Parser parser3{file3};
-  Parser parser5{file5};
+    return buffer.str();
+  }
+
+  Parser parser1{setup("assets/dataset01.xml")};
+  Parser parser2{setup("assets/dataset02.xml")};
+  Parser parser3{setup("assets/dataset03.xml")};
+  Parser parser4{setup("assets/dataset04.xml")};
+  Parser parser5{setup("assets/dataset05.xml")};
+  Parser parser6{setup("assets/dataset06.xml")};
 };
 
 TEST_F(ParserTest, ParseFileReturnsTrueWhenValidXML) {
