@@ -40,15 +40,24 @@ bool Parser::parse_file() {
       if (isTagElement(tag[1], SLASH)) {
         std::string last_tag = linked_stack.pop();
 
-        std::size_t length_of_content = left_bracket_of_closing_tag_position - right_bracket_of_opening_tag_position - 1;
-        std::string tag_content = content_.substr(right_bracket_of_opening_tag_position + 1, length_of_content);
-        //std::cout << tag_content << std::endl;
-        std::cout << last_tag << std::endl;
-        std::cout << tag << std::endl;
 
         if (!match(tag, last_tag)) {
           return false;
         }
+
+        std::size_t length_of_content = left_bracket_of_closing_tag_position - right_bracket_of_opening_tag_position - 1;
+        std::string tag_content = content_.substr(right_bracket_of_opening_tag_position + 1, length_of_content);
+
+        if (last_tag == "<name>") {
+
+        } else if (last_tag == "<height>") {
+
+        } else if (last_tag == "<width>") {
+
+        } else if (last_tag == "<data>") {
+
+        }
+
       } else {
         right_bracket_of_opening_tag_position = index;
         linked_stack.push(tag);
