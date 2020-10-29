@@ -1,6 +1,6 @@
 #include "linked_stack.h"
 
-template<typename T>
+template <typename T>
 structures::LinkedStack<T>::LinkedStack(void) {
   top_ = nullptr;
   size_ = 0u;
