@@ -1,6 +1,7 @@
 #include "linked_queue.h"
 
 #include <stdexcept>
+#include <utility>
 
 template<typename T>
 structures::LinkedQueue<T>::LinkedQueue(void) {
@@ -98,3 +99,4 @@ std::size_t structures::LinkedQueue<T>::size(void) const {
 }
 
 template class structures::LinkedQueue<int>;
+template class structures::LinkedQueue<std::pair<int, int>>;

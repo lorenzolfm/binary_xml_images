@@ -56,6 +56,7 @@ bool Parser::parse_file() {
           img.width(std::stoi(tag_data));
         } else if (last_tag == "<data>") {
           img.matrix(tag_data);
+          std::cout << img.name() << " " << img.label() << std::endl;
           images_.push_back(img);
         }
 
@@ -88,10 +89,6 @@ std::string Parser::extract_substr(std::size_t begin, std::size_t index) {
 
 void Parser::display() {
   for (auto i = 0; i < images_.size(); i++) {
-    std::cout << images_[i].name() << std::endl;
-    //std::cout << images_[i].height() << std::endl;
-    //std::cout << images_[i].width() << std::endl;
-    // std::cout << images_[i].matrix() << std::endl;
-    std::cout << "" << std::endl;
+    std::cout << images_[i].name() << " " << images_[i].label() << std::endl;
   }
 }
