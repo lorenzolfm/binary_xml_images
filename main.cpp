@@ -26,7 +26,7 @@ int main (int argc, char *argv[]) {
 
   bool valid = parser.parse_file();
 
-  parser.display();
+  //parser.display();
 
   if (!valid) printf("Not valid");
   else printf("Valid");
