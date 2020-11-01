@@ -15,7 +15,7 @@ static const char SLASH = '/';
 Parser::Parser(std::string content) : content_(content) {}
 
 bool Parser::parse_file() {
-  Image temp;
+  Image img;
   std::string tag;
   std::size_t tag_begin;
 
@@ -50,15 +50,14 @@ bool Parser::parse_file() {
         std::string tag_content = content_.substr(right_bracket_of_opening_tag_position + 1, length_of_content);
 
         if (last_tag == "<name>") {
-          temp.name(tag_content);
+          img.name(tag_content);
         } else if (last_tag == "<height>") {
-          temp.height(std::stoi(tag_content));
+          img.height(std::stoi(tag_content));
         } else if (last_tag == "<width>") {
-          temp.width(std::stoi(tag_content));
+          img.width(std::stoi(tag_content));
         } else if (last_tag == "<data>") {
-          // Set data
-          temp.matrix(tag_content);
-          images_.push_back(temp);
+          img.matrix(tag_content);
+          images_.push_back(img);
         }
 
       } else {
