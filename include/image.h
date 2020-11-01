@@ -1,10 +1,13 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include "matrix.h"
 #include <string>
 
 class Image {
   public:
+
+    Image() : matrix_(10, 10) {}
 
     std::string name(void) { return name_; }
 
@@ -12,7 +15,7 @@ class Image {
 
     std::size_t width(void) { return width_; }
 
-    std::string matrix(void) { return matrix_; }
+    //std::string matrix(void) { return matrix_; }
 
     void name(std::string name) { name_ = name; }
 
@@ -20,7 +23,8 @@ class Image {
 
     void width(std::size_t width) { width_ = width; }
 
-    void matrix(std::string matrix) { matrix_ = matrix; }
+    //void matrix(std::string matrix) {
+    //}
 
   private:
     // Nome da imagem
@@ -30,7 +34,7 @@ class Image {
     // Largura da imagem
     std::size_t width_;
     // Dados da imagem
-    std::string matrix_;
+    Matrix matrix_;
 };
 
 #endif

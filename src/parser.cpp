@@ -56,7 +56,7 @@ bool Parser::parse_file() {
         } else if (last_tag == "<width>") {
           img.width(std::stoi(tag_content));
         } else if (last_tag == "<data>") {
-          img.matrix(tag_content);
+          //img.matrix(tag_content);
           images_.push_back(img);
         }
 
@@ -98,7 +98,7 @@ void Parser::display() {
     std::cout << images_[i].name() << std::endl;
     std::cout << images_[i].height() << std::endl;
     std::cout << images_[i].width() << std::endl;
-    std::cout << images_[i].matrix() << std::endl;
+    //std::cout << images_[i].matrix() << std::endl;
     std::cout << "" << std::endl;
   }
 }
