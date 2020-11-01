@@ -2,6 +2,7 @@
 #define PARSER_H
 
 #include <string.h>
+#include <vector>
 
 #include "linked_stack.h"
 #include "image.h"
@@ -14,6 +15,7 @@ class Parser {
   //! Checks if a opening_tag matches a closing_tag
   bool match(std::string opening_tag, std::string closing_tag);
 
+  void display();
  private:
   //! Check if content_at_index is equal to tag_element
   bool isTagElement(const char& content_at_index, const char& tag_element);
@@ -22,6 +24,7 @@ class Parser {
 
   std::string content_;
   structures::LinkedStack<std::string> linked_stack;
+  std::vector<Image> images_;
 };
 
 #endif

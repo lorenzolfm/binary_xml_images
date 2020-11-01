@@ -1,4 +1,5 @@
 #include <parser.h>
+#include "image.h"
 #include <stdio.h>
 
 #include <fstream>
@@ -14,6 +15,7 @@ static const char SLASH = '/';
 Parser::Parser(std::string content) : content_(content) {}
 
 bool Parser::parse_file() {
+  Image temp;
   std::string tag;
   std::size_t tag_begin;
 
@@ -48,13 +50,15 @@ bool Parser::parse_file() {
         std::string tag_content = content_.substr(right_bracket_of_opening_tag_position + 1, length_of_content);
 
         if (last_tag == "<name>") {
-
+          temp.name(tag_content);
         } else if (last_tag == "<height>") {
-
+          temp.height(std::stoi(tag_content));
         } else if (last_tag == "<width>") {
-
+          temp.width(std::stoi(tag_content));
         } else if (last_tag == "<data>") {
-
+          // Set data
+          temp.matrix(tag_content);
+          images_.push_back(temp);
         }
 
       } else {
@@ -88,4 +92,14 @@ std::string Parser::assembly_tag(std::size_t begin, std::size_t index) {
   std::size_t length;
   length = index + 1 - begin;
   return content_.substr(begin, length);
+}
+
+void Parser::display() {
+  for (auto i = 0; i < images_.size(); i++) {
+    std::cout << images_[i].name() << std::endl;
+    std::cout << images_[i].height() << std::endl;
+    std::cout << images_[i].width() << std::endl;
+    std::cout << images_[i].matrix() << std::endl;
+    std::cout << "" << std::endl;
+  }
 }
