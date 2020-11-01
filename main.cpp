@@ -26,10 +26,10 @@ int main (int argc, char *argv[]) {
 
   bool valid = parser.parse_file();
 
-  //parser.display();
+  parser.display();
 
-  if (!valid) printf("Not valid");
-  else printf("Valid");
+  if (!valid) printf("Not valid\n");
+  else printf("Valid\n");
 
   return 0;
 }

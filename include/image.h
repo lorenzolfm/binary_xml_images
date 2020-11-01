@@ -7,7 +7,7 @@
 class Image {
   public:
 
-    Image() : matrix_(10, 10) {}
+    Image() : matrix_(0, 0) {}
 
     std::string name(void) { return name_; }
 
@@ -23,8 +23,10 @@ class Image {
 
     void width(std::size_t width) { width_ = width; }
 
-    //void matrix(std::string matrix) {
-    //}
+    void matrix(std::string matrix) {
+      Matrix content = Matrix(10, 10);
+      matrix_ = content;
+    }
 
   private:
     // Nome da imagem

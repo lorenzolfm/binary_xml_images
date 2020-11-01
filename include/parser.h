@@ -18,10 +18,8 @@ class Parser {
 
   void display();
  private:
-  //! Check if content_at_index is equal to tag_element
-  bool isTagElement(const char& content_at_index, const char& tag_element);
 
-  std::string assembly_tag(std::size_t begin, std::size_t index);
+  std::string extract_substr(std::size_t begin, std::size_t index);
 
   void initialize_image_object(std::string tag, std::string tag_content);
 

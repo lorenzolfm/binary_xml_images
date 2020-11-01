@@ -6,12 +6,14 @@
 
 class Matrix {
  public:
+
    Matrix(std::size_t height, std::size_t width) {
      width_ = width;
      height_ = height;
    };
   int connected_components();
  private:
+  int** matrix;
   std::size_t width_;
   std::size_t height_;
 };

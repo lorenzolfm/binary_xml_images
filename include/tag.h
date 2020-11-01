@@ -2,17 +2,15 @@
 #define TAG_H
 
 #include <string>
+#include <cstdint>
 
 class Tag {
   public:
-    Tag(void);
-
   private:
-    // Nome da tag
-    std::string name_;
-    // Conteúdo da tag
-    std::string content_;
-
+    std::string tag_element;
+    std::size_t tag_begin_index;
+    std::size_t left_bracket_index;
+    std::size_t right_bracket_index;
 }
 
 #endif
