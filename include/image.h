@@ -15,6 +15,6 @@ class Image {
     std::size_t width;
     // Dados da imagem
     int** matrix;
-}
+};
 
 #endif

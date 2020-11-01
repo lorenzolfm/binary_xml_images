@@ -40,7 +40,6 @@ bool Parser::parse_file() {
       if (isTagElement(tag[1], SLASH)) {
         std::string last_tag = linked_stack.pop();
 
-
         if (!match(tag, last_tag)) {
           return false;
         }
@@ -89,11 +88,4 @@ std::string Parser::assembly_tag(std::size_t begin, std::size_t index) {
   std::size_t length;
   length = index + 1 - begin;
   return content_.substr(begin, length);
-}
-
-void Parser::get_tag_content(void) {
-  auto index = 0u;
-  while (index < content_.length()) {
-
-  }
 }
