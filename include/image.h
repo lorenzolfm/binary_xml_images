@@ -30,6 +30,8 @@ class Image {
       }
     }
 
+
+
     for (std::size_t i = 0; i < height_; i++) {
       delete[] matrix_[i];
     }
