@@ -8,7 +8,6 @@
 #include <string>
 
 #include "image.h"
-//#include "tag.h"
 
 static const char LEFT_BRACKET = '<';
 static const char RIGHT_BRACKET = '>';
@@ -18,7 +17,6 @@ Parser::Parser(std::string content) : content_(content) {}
 
 bool Parser::parse_file() {
   Image img;
-  //Tag tag;
   std::string tag{""};
   std::size_t tag_begin{0u};
   std::size_t left_bracket_of_closing_tag_position{0u};
