@@ -6,6 +6,8 @@
 
 #include "linked_stack.h"
 
+Parser::Parser(void) { content = ""; }
+
 Parser::Parser(std::string xml_content) : content(xml_content) {}
 
 bool Parser::parse(void) {
@@ -14,6 +16,9 @@ bool Parser::parse(void) {
   std::size_t tag_begin_index{0u};
   std::size_t index{0u};
   char character{'0'};
+
+  std::size_t right_bracket_of_opening_tag_position{0u};
+  std::size_t left_bracket_of_closing_tag_position{0u};
 
   std::size_t opening_tag_lbracket_position{0u};
   std::string name_tag{""};
@@ -26,6 +31,10 @@ bool Parser::parse(void) {
 
     if (character == LEFT_BRACKET) {
       tag_begin_index = index;
+
+      if (content[index + 1] == SLASH) {
+        left_bracket_of_closing_tag_position = index;
+      }
     }
 
     if (character == RIGHT_BRACKET) {
@@ -38,14 +47,21 @@ bool Parser::parse(void) {
           return false;
         }
 
+        std::size_t length_of_content = left_bracket_of_closing_tag_position -
+                                        right_bracket_of_opening_tag_position -
+                                        1;
+
+        std::string tag_data = content.substr(
+            right_bracket_of_opening_tag_position + 1, length_of_content);
+
         if (last_tag == "<name>") {
-          name_tag = get_substr(opening_tag_lbracket_position, index);
+          name_tag = tag_data;
         } else if (last_tag == "<height>") {
-          height_tag = get_substr(opening_tag_lbracket_position, index);
+          height_tag = tag_data;
         } else if (last_tag == "<width>") {
-          width_tag = get_substr(opening_tag_lbracket_position, index);
+          width_tag = tag_data;
         } else if (last_tag == "<data>") {
-          data_tag = get_substr(opening_tag_lbracket_position, index);
+          data_tag = tag_data;
 
           std::vector<std::string> image_components;
           image_components.push_back(name_tag);
@@ -57,6 +73,7 @@ bool Parser::parse(void) {
         }
 
       } else {
+        right_bracket_of_opening_tag_position = index;
         opening_tag_lbracket_position = tag_begin_index;
         stack.push(tag);
       }
@@ -85,3 +102,5 @@ std::string Parser::get_substr(std::size_t start, std::size_t finish) {
 std::vector<std::vector<std::string>> Parser::get_parsed_data(void) {
   return parsed_data;
 }
+
+void Parser::set_content(std::string xml_content) { content = xml_content; }

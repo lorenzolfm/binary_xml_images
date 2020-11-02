@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-#include <iostream>
-
 //! Classe Parser
 /*!
    Classe responsável por fazer a validação da string que representa o arquivo
@@ -13,6 +11,9 @@
  */
 class Parser {
  public:
+  // TODO: DOC
+  Parser(void);
+
   //! Construtor
   /*!
      Construtor. Tem como parâmetro o conteúdo do arquivo XML em formato de
@@ -49,8 +50,9 @@ class Parser {
    */
   bool match(const std::string& opening_tag, const std::string& closing_tag);
 
-  std::vector<std::vector<std::string>> get_parsed_data(void);
+  void set_content(std::string xml_content);
 
+  std::vector<std::vector<std::string>> get_parsed_data(void);
  private:
   //! Getter Substring
   /*!
