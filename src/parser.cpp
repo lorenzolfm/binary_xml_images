@@ -10,6 +10,8 @@
 Parser::Parser(std::string content) : content_(content) {}
 
 bool Parser::parse_file() {
+  structures::LinkedStack<std::string> linked_stack;
+
   Image img;
   std::string tag{""};
   std::size_t tag_begin{0u};
