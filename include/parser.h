@@ -26,6 +26,10 @@ class Parser {
   std::string content_;
   structures::LinkedStack<std::string> linked_stack;
   std::vector<Image> images_;
+
+  static const char LEFT_BRACKET = '<';
+  static const char RIGHT_BRACKET = '>';
+  static const char SLASH = '/';
 };
 
 #endif

@@ -7,10 +7,6 @@
 #include "image.h"
 #include "parser.h"
 
-static const char LEFT_BRACKET = '<';
-static const char RIGHT_BRACKET = '>';
-static const char SLASH = '/';
-
 Parser::Parser(std::string content) : content_(content) {}
 
 bool Parser::parse_file() {
@@ -57,7 +53,7 @@ bool Parser::parse_file() {
         } else if (last_tag == "<width>") {
           img.width(std::stoi(tag_data));
         } else if (last_tag == "<data>") {
-          img.matrix(tag_data);
+          img.data(tag_data);
           //std::cout << img.name() << " " << img.label() << std::endl;
           images_.push_back(img);
         }
