@@ -38,15 +38,15 @@ class ParserTest : public ::testing::Test {
 };
 
 TEST_F(ParserTest, ParseFileReturnsTrueWhenValidXML) {
-  ASSERT_TRUE(parser1.parse_file());
-  ASSERT_TRUE(parser4.parse_file());
-  ASSERT_TRUE(parser6.parse_file());
+  ASSERT_TRUE(parser1.parse());
+  ASSERT_TRUE(parser4.parse());
+  ASSERT_TRUE(parser6.parse());
 }
 
 TEST_F(ParserTest, ParseFileReturnsFalseWhenInvalidXML) {
-  ASSERT_FALSE(parser2.parse_file());
-  ASSERT_FALSE(parser3.parse_file());
-  ASSERT_FALSE(parser5.parse_file());
+  ASSERT_FALSE(parser2.parse());
+  ASSERT_FALSE(parser3.parse());
+  ASSERT_FALSE(parser5.parse());
 }
 
 TEST_F(ParserTest, MatchReturnsTrueWhenMatches) {
