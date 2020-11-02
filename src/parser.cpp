@@ -81,3 +81,7 @@ bool Parser::match(const std::string& opening_tag,
 std::string Parser::get_substr(std::size_t start, std::size_t finish) {
   return content.substr(start, finish - start + 1);
 }
+
+std::vector<std::vector<std::string>> Parser::get_parsed_data(void) {
+  return parsed_data;
+}

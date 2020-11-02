@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <iostream>
+
 //! Classe Parser
 /*!
    Classe responsável por fazer a validação da string que representa o arquivo
@@ -46,6 +48,8 @@ class Parser {
      a tag de fechamento não combinem
    */
   bool match(const std::string& opening_tag, const std::string& closing_tag);
+
+  std::vector<std::vector<std::string>> get_parsed_data(void);
 
  private:
   //! Getter Substring
