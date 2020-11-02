@@ -84,8 +84,6 @@ TEST_F(MatrixTest, PopulatesSuccessfully) {
 
   for (auto i{0}; i < rows; i++) {
     for (auto j{0}; j < columns; j++) {
-      std::cout << matrix.matrix[i][j] << std::endl;
-
       if (j % 2 == 0) {
         ASSERT_EQ(matrix.matrix[i][j], 1);
       } else {
