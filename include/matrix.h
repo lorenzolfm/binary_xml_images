@@ -4,6 +4,11 @@
 #include <cstdint>
 #include <string>
 
+//! Classe Matriz
+/*!
+   Classe matriz. Representa uma matriz m x n. Onde m é o número de linhas e n é
+   o número de colunas.
+ */
 class Matrix {
  public:
   //! Construtor
@@ -38,9 +43,8 @@ class Matrix {
 
      \param data: string para popular a matriz.
    */
-  void populate(std::string data);
+  void populate(const std::string& content);
 
- private:
   //! Linhas
   /*!
      Número de linhas da matriz. Tipo inteiro sem sinal size_t.
@@ -52,6 +56,7 @@ class Matrix {
    */
   std::size_t columns_;
 
+ //private:
   //! Matriz
   /*!
      Matriz bidimensional de números inteiros. Pointeiro para ponteiro para

@@ -5,9 +5,10 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
+#include "parser.h"
+#include "matrix.h"
 #include "linked_stack.h"
 #include "linked_queue.h"
-#include "parser.h"
 
 int main(int argc, char* argv[]) {
   std::srand(std::time(NULL));
@@ -55,6 +56,43 @@ TEST_F(ParserTest, MatchReturnsTrueWhenMatches) {
 
 TEST_F(ParserTest, MatchReturnsFalseWhenDontMatch) {
   ASSERT_FALSE(parser1.match("<oi>", "</io>"));
+}
+
+class MatrixTest : public ::testing::Test {
+  protected:
+    std::size_t rows{4};
+    std::size_t columns{4};
+    Matrix matrix{rows, columns};
+};
+
+TEST_F(MatrixTest, RowsAndColumnsAttributesAsExpectedAfterInitializing) {
+  ASSERT_EQ(matrix.rows_, rows);
+  ASSERT_EQ(matrix.columns_, columns);
+}
+
+TEST_F(MatrixTest, MatrixHasOnlyZerosAfterInitialization) {
+  for (auto i{0}; i < rows; i++) {
+    for (auto j{0}; j < columns; j++) {
+      ASSERT_EQ(matrix.matrix[i][j], 0);
+    }
+  }
+}
+
+TEST_F(MatrixTest, PopulatesSuccessfully) {
+  std::string data = "1010\n1010\n1010\n1010\n";
+  matrix.populate(data);
+
+  for (auto i{0}; i < rows; i++) {
+    for (auto j{0}; j < columns; j++) {
+      std::cout << matrix.matrix[i][j] << std::endl;
+
+      if (j % 2 == 0) {
+        ASSERT_EQ(matrix.matrix[i][j], 1);
+      } else {
+        ASSERT_EQ(matrix.matrix[i][j], 0);
+      }
+    }
+  }
 }
 
 class LinkedStackTest : public ::testing::Test {
