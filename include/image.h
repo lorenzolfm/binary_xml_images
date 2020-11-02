@@ -18,6 +18,14 @@ class Image {
    */
   Image(std::vector<std::string> tags);
 
+  std::string name(void) const { return name_; }
+
+  std::size_t height(void) const { return height_; }
+
+  std::size_t width(void) const { return width_; }
+
+  std::string data(void) const { return data_; }
+
  private:
   //! Nome.
   /*!
