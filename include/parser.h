@@ -46,6 +46,8 @@ class Parser {
    */
   bool match(const std::string& opening_tag, const std::string& closing_tag);
 
+  std::string extract_substr(std::size_t start, std::size_t finish);
+
  private:
   //! Conteúdo.
   /*!
