@@ -24,12 +24,10 @@ int main (int argc, char *argv[]) {
 
   Parser parser(buffer.str());
 
-  bool valid = parser.parse_file();
+  bool valid = parser.parse();
 
-  //parser.display();
-
-  if (!valid) printf("Not valid");
-  else printf("Valid");
+  if (!valid) printf("Not valid\n");
+  else printf("Valid\n");
 
   return 0;
 }

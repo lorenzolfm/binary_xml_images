@@ -1,33 +1,76 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include <string.h>
-#include <vector>
+#include <string>
 
-#include "linked_stack.h"
-#include "image.h"
-
+//! Classe Parser
+/*!
+   Classe responsável por fazer a validação da string que representa o arquivo
+   XML e por separar as tags que representam uma imagem.
+ */
 class Parser {
  public:
-  Parser(std::string content);
-  //! Verify semantics
-  bool parse_file();
-  //! Checks if a opening_tag matches a closing_tag
-  bool match(std::string opening_tag, std::string closing_tag);
+  //! Construtor
+  /*!
+     Construtor. Tem como parâmetro o conteúdo do arquivo XML em formato de
+     string.
 
+     \param xml_content. Conteúdo do arquivo XML em formato de string. Usado
+     para inicializar o atributro privado content.
+   */
+  Parser(std::string xml_content);
 
-  void display();
+  //! Analísa Conteúdo.
+  /*!
+     Verifica o aninhamento e fechamento das tags e separa os elementos
+     pertencentes a cada imagem.
+
+     \return true: Se o aninhamento e fechamento das tags está correto.
+     \return false: Se o aninhamento ou fechamento das tags está incorreto.
+   */
+  bool parse(void);
+
+  //! Tags Combinam.
+  /*!
+     Verifica, através do uso de uma regex, se as tags de abertura e fechamento
+     do elemento combinam.
+
+     \param opening_tag: Referência constante a string (const std::string&) que
+     representa a tag de abertura. \param closing_tag: Referência constante a
+     string (const std::sting&) que representa a tag de fechamento.
+
+     \return true: Retorna verdadeiro caso a tag de abertura e a tag de
+     fechamento combinem.
+     \return false: Retorna falso caso a tag de abertura e
+     a tag de fechamento não combinem
+   */
+  bool match(const std::string& opening_tag, const std::string& closing_tag);
+
  private:
-  //! Check if content_at_index is equal to tag_element
-  bool isTagElement(const char& content_at_index, const char& tag_element);
-
-  std::string assembly_tag(std::size_t begin, std::size_t index);
-
-  void initialize_image_object(std::string tag, std::string tag_content);
-
-  std::string content_;
-  structures::LinkedStack<std::string> linked_stack;
-  std::vector<Image> images_;
+  //! Conteúdo.
+  /*!
+     Conteúdo do arquivo XML em formato de string.
+   */
+  std::string content;
+  //! Símbolo de abertura de elemento.
+  /*!
+     Símbolo de abertura de elemento de XML. Variável de classe, char constante
+     e estático (static const char).
+   */
+  static const char LEFT_BRACKET = '<';
+  //! Símbolo de fechamento de elemento.
+  /*!
+     Símbolo de fechamento de elemento de XML. Variável de classe, char
+     constante e estático (static const char).
+   */
+  static const char RIGHT_BRACKET = '>';
+  //! Símbolo de sinalização para tags de fechamento.
+  /*!
+     Símbolo de sinalização de tags de fechamento. Uma tag que contém como
+     segundo caracter uma barra é uma tag de fechamento. Váriavel de classe,
+     char constante e estático (static const char).
+   */
+  static const char SLASH = '/';
 };
 
 #endif
