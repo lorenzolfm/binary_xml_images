@@ -12,8 +12,12 @@ class Controller {
   Controller(char* file_name);
 
   bool parse(void);
+
+  void count(void);
+
  private:
   Parser parser;
+  std::vector<Image> images;
 };
 
 #endif
