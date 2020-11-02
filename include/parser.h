@@ -2,6 +2,7 @@
 #define PARSER_H
 
 #include <string>
+#include <vector>
 
 //! Classe Parser
 /*!
@@ -46,26 +47,45 @@ class Parser {
    */
   bool match(const std::string& opening_tag, const std::string& closing_tag);
 
-  std::string extract_substr(std::size_t start, std::size_t finish);
-
  private:
+  //! Getter Substring
+  /*!
+     Extrai uma substring da string content, dado um ínicio e um final.
+
+     \param start: Índice de início da substring (std::size_t).
+     \param finish: Índice final da substring (std::size_t).
+
+     \return Retorna a substring extraída (std::string).
+   */
+  std::string get_substr(std::size_t start, std::size_t finish);
+
   //! Conteúdo.
   /*!
      Conteúdo do arquivo XML em formato de string.
    */
   std::string content;
+
+  //! Dados "Parseados"
+  /*!
+     Vetor de vetor de strings. Cada elemento seu armazena um conjunto de
+     vetores com as informações relevantes de cada imagem.
+   */
+  std::vector<std::vector<std::string>> parsed_data;
+
   //! Símbolo de abertura de elemento.
   /*!
      Símbolo de abertura de elemento de XML. Variável de classe, char constante
      e estático (static const char).
    */
   static const char LEFT_BRACKET = '<';
+
   //! Símbolo de fechamento de elemento.
   /*!
      Símbolo de fechamento de elemento de XML. Variável de classe, char
      constante e estático (static const char).
    */
   static const char RIGHT_BRACKET = '>';
+
   //! Símbolo de sinalização para tags de fechamento.
   /*!
      Símbolo de sinalização de tags de fechamento. Uma tag que contém como

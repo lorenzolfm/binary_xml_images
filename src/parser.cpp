@@ -29,7 +29,7 @@ bool Parser::parse(void) {
     }
 
     if (character == RIGHT_BRACKET) {
-      tag = extract_substr(tag_begin_index, index);
+      tag = get_substr(tag_begin_index, index);
 
       if (tag[1] == SLASH) {
         std::string last_tag = stack.pop();
@@ -39,13 +39,21 @@ bool Parser::parse(void) {
         }
 
         if (last_tag == "<name>") {
-          name_tag = extract_substr(opening_tag_lbracket_position, index);
+          name_tag = get_substr(opening_tag_lbracket_position, index);
         } else if (last_tag == "<height>") {
-          height_tag = extract_substr(opening_tag_lbracket_position, index);
+          height_tag = get_substr(opening_tag_lbracket_position, index);
         } else if (last_tag == "<width>") {
-          width_tag = extract_substr(opening_tag_lbracket_position, index);
+          width_tag = get_substr(opening_tag_lbracket_position, index);
         } else if (last_tag == "<data>") {
-          data_tag = extract_substr(opening_tag_lbracket_position, index);
+          data_tag = get_substr(opening_tag_lbracket_position, index);
+
+          std::vector<std::string> image_components;
+          image_components.push_back(name_tag);
+          image_components.push_back(height_tag);
+          image_components.push_back(width_tag);
+          image_components.push_back(data_tag);
+
+          parsed_data.push_back(image_components);
         }
 
       } else {
@@ -70,6 +78,6 @@ bool Parser::match(const std::string& opening_tag,
   return match == 0;
 }
 
-std::string Parser::extract_substr(std::size_t start, std::size_t finish) {
+std::string Parser::get_substr(std::size_t start, std::size_t finish) {
   return content.substr(start, finish - start + 1);
 }
