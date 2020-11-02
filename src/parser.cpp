@@ -1,6 +1,3 @@
-#include <parser.h>
-#include <stdio.h>
-
 #include <fstream>
 #include <iostream>
 #include <regex>
@@ -8,6 +5,7 @@
 #include <string>
 
 #include "image.h"
+#include "parser.h"
 
 static const char LEFT_BRACKET = '<';
 static const char RIGHT_BRACKET = '>';
@@ -45,8 +43,12 @@ bool Parser::parse_file() {
           return false;
         }
 
-        std::size_t length_of_content = left_bracket_of_closing_tag_position - right_bracket_of_opening_tag_position - 1;
-        std::string tag_data = content_.substr(right_bracket_of_opening_tag_position + 1, length_of_content);
+        std::size_t length_of_content = left_bracket_of_closing_tag_position -
+                                        right_bracket_of_opening_tag_position -
+                                        1;
+        std::string tag_data = content_.substr(
+            right_bracket_of_opening_tag_position + 1, length_of_content);
+
 
         if (last_tag == "<name>") {
           img.name(tag_data);
@@ -56,7 +58,7 @@ bool Parser::parse_file() {
           img.width(std::stoi(tag_data));
         } else if (last_tag == "<data>") {
           img.matrix(tag_data);
-          std::cout << img.name() << " " << img.label() << std::endl;
+          //std::cout << img.name() << " " << img.label() << std::endl;
           images_.push_back(img);
         }
 
@@ -88,7 +90,7 @@ std::string Parser::extract_substr(std::size_t begin, std::size_t index) {
 }
 
 void Parser::display() {
-  for (auto i = 0; i < images_.size(); i++) {
-    std::cout << images_[i].name() << " " << images_[i].label() << std::endl;
-  }
+  //for (auto i = 0; i < images_.size(); i++) {
+    //std::cout << images_[i]->name() << " " << images_[i]->label() << std::endl;
+  //}
 }
