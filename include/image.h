@@ -3,9 +3,28 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 
 class Image {
  public:
+  //! Construtor
+  /*!
+     Constrói uma instância do classe Imagem. Recebe como parâmetros um vetor de
+     strings que contém as todos os elementos do XML relevantes para uma imagem.
+
+     \param tags: Vetor de strings que contém todos os elementos do XML
+     (elemento = tag abertura + conteúdo + tag fechamento) relevantes para o
+     objeto imagem
+   */
+  Image(std::vector<std::string> tags);
+
+  std::string name(void) const { return name_; }
+
+  std::size_t height(void) const { return height_; }
+
+  std::size_t width(void) const { return width_; }
+
+  std::string data(void) const { return data_; }
 
  private:
   //! Nome.

@@ -50,7 +50,6 @@ void ImageProcessor::count_connected_components(void) {
       }
     }
   }
-  std::cout << label << std::endl;
   connected_components_count = label;
 }
 
