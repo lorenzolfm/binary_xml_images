@@ -6,6 +6,7 @@
 
 #include "gtest/gtest.h"
 #include "parser.h"
+#include "image_processor.h"
 #include "matrix.h"
 #include "linked_stack.h"
 #include "linked_queue.h"
@@ -56,6 +57,22 @@ TEST_F(ParserTest, MatchReturnsTrueWhenMatches) {
 
 TEST_F(ParserTest, MatchReturnsFalseWhenDontMatch) {
   ASSERT_FALSE(parser1.match("<oi>", "</io>"));
+}
+
+class ImageProcessorTest: public ::testing::Test {
+  protected:
+    std::string image_data {"000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000001110000000000000000\n000000000011000000000000000000\n001100100111110011111000111100\n001100100011000011000001110000\n001100100011000011111001100000\n001100100011000000111101100000\n001101100011000010011101110000\n000111100011000011111000111100\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n000000000000000000000000000000\n"};
+
+    ImageProcessor image_processor{image_data, 20, 30};
+};
+
+TEST_F(ImageProcessorTest, ConstructorSetsConnectedComponentsCountToOne) {
+  ASSERT_EQ(image_processor.get_connected_components_count(), 0);
+}
+
+TEST_F(ImageProcessorTest, CountConnectedComponent) {
+  image_processor.count_connected_components();
+  ASSERT_EQ(image_processor.get_connected_components_count(), 4);
 }
 
 class MatrixTest : public ::testing::Test {
