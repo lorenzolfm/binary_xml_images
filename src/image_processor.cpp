@@ -16,10 +16,10 @@ void ImageProcessor::count_connected_components(void) {
   structures::LinkedQueue<pixel> paths;
   int label = 1;
 
-  for (std::size_t row{0}; row < E.rows_; row++) {
-    for (std::size_t column{0}; column < E.columns_; column++) {
-      if (E.matrix[row][column] && !R.matrix[row][column]) {
-        R.matrix[row][column] = label;
+  for (std::size_t row{0}; row < E.rows(); row++) {
+    for (std::size_t column{0}; column < E.columns(); column++) {
+      if (E(row, column) && !R(row, column)) {
+        R(row, column) = label;
         paths.enqueue({column, row});
 
         while (!paths.empty()) {
@@ -27,22 +27,20 @@ void ImageProcessor::count_connected_components(void) {
           int x = pair.first;
           int y = pair.second;
 
-          if ((x - 1 >= 0) && (!R.matrix[y][x - 1] && E.matrix[y][x - 1])) {
-            R.matrix[y][x - 1] = label;
+          if ((x - 1 >= 0) && (!R(y, x - 1) && E(y, x - 1))) {
+            R(y, x - 1) = label;
             paths.enqueue({x - 1, y});
           }
-          if ((x + 1 < E.columns_) &&
-              (!R.matrix[y][x + 1] && E.matrix[y][x + 1])) {
-            R.matrix[y][x + 1] = label;
+          if ((x + 1 < E.columns()) && (!R(y, x + 1) && E(y, x + 1))) {
+            R(y, x + 1) = label;
             paths.enqueue({x + 1, y});
           }
-          if ((y - 1 >= 0) && (!R.matrix[y - 1][x] && E.matrix[y - 1][x])) {
-            R.matrix[y - 1][x] = label;
+          if ((y - 1 >= 0) && (!R(y - 1, x) && E(y - 1, x))) {
+            R(y - 1, x) = label;
             paths.enqueue({x, y - 1});
           }
-          if ((y + 1 < E.rows_) &&
-              (!R.matrix[y + 1][x] && E.matrix[y + 1][x])) {
-            R.matrix[y + 1][x] = label;
+          if ((y + 1 < E.rows()) && (!R(y + 1, x) && E(y + 1, x))) {
+            R(y + 1, x) = label;
             paths.enqueue({x, y + 1});
           }
         }
