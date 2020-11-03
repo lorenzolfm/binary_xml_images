@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdexcept>
 #include <fstream>
 #include <sstream>
 
@@ -83,14 +83,14 @@ class MatrixTest : public ::testing::Test {
 };
 
 TEST_F(MatrixTest, RowsAndColumnsAttributesAsExpectedAfterInitializing) {
-  ASSERT_EQ(matrix.rows_, rows);
-  ASSERT_EQ(matrix.columns_, columns);
+  ASSERT_EQ(matrix.rows(), rows);
+  ASSERT_EQ(matrix.columns(), columns);
 }
 
 TEST_F(MatrixTest, MatrixHasOnlyZerosAfterInitialization) {
   for (auto i{0}; i < rows; i++) {
     for (auto j{0}; j < columns; j++) {
-      ASSERT_EQ(matrix.matrix[i][j], 0);
+      ASSERT_EQ(matrix(i, j), 0);
     }
   }
 }
@@ -102,12 +102,31 @@ TEST_F(MatrixTest, PopulatesSuccessfully) {
   for (auto i{0}; i < rows; i++) {
     for (auto j{0}; j < columns; j++) {
       if (j % 2 == 0) {
-        ASSERT_EQ(matrix.matrix[i][j], 1);
+        ASSERT_EQ(matrix(i, j), 1);
       } else {
-        ASSERT_EQ(matrix.matrix[i][j], 0);
+        ASSERT_EQ(matrix(i, j), 0);
       }
     }
   }
+}
+
+TEST_F(MatrixTest, OperatorOverloadLHS) {
+  matrix(0, 0) = 2;
+
+  ASSERT_EQ(matrix(0, 0), 2);
+}
+
+TEST_F(MatrixTest, OperatorOverload) {
+  std::string data = "1010\n1010\n1010\n1010\n";
+  matrix.populate(data);
+
+  ASSERT_EQ(matrix(0, 0), 1);
+  ASSERT_EQ(matrix(0, 1), 0);
+}
+
+TEST_F(MatrixTest, OperatorOverloadOutOfBounds) {
+  ASSERT_THROW(matrix(4, 0), std::out_of_range);
+  ASSERT_THROW(matrix(0, 4), std::out_of_range);
 }
 
 class LinkedStackTest : public ::testing::Test {

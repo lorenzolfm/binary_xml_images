@@ -12,19 +12,15 @@ Parser::Parser(std::string xml_content) : content(xml_content) {}
 
 bool Parser::parse(void) {
   structures::LinkedStack<std::string> stack;
-  std::string tag{""};
-  std::size_t tag_begin_index{0u};
-  std::size_t index{0u};
-  char character{'0'};
 
+  std::size_t index{0u};
+  std::size_t tag_begin_index{0u};
   std::size_t right_bracket_of_opening_tag_position{0u};
   std::size_t left_bracket_of_closing_tag_position{0u};
 
-  std::size_t opening_tag_lbracket_position{0u};
-  std::string name_tag{""};
-  std::string height_tag{""};
-  std::string width_tag{""};
-  std::string data_tag{""};
+  char character{'0'};
+  std::string tag{""};
+  std::string name{""}, height{""}, width{""}, data{""};
 
   while (index < content.length()) {
     character = content[index];
@@ -47,34 +43,32 @@ bool Parser::parse(void) {
           return false;
         }
 
-        std::size_t length_of_content = left_bracket_of_closing_tag_position -
-                                        right_bracket_of_opening_tag_position -
-                                        1;
-
-        std::string tag_data = content.substr(
-            right_bracket_of_opening_tag_position + 1, length_of_content);
+        std::string tag_data =
+            get_substr(right_bracket_of_opening_tag_position + 1,
+                       left_bracket_of_closing_tag_position - 1);
 
         if (last_tag == "<name>") {
-          name_tag = tag_data;
+          name = tag_data;
         } else if (last_tag == "<height>") {
-          height_tag = tag_data;
+          height = tag_data;
         } else if (last_tag == "<width>") {
-          width_tag = tag_data;
+          width = tag_data;
         } else if (last_tag == "<data>") {
-          data_tag = tag_data;
+          data = tag_data;
 
           std::vector<std::string> image_components;
-          image_components.push_back(name_tag);
-          image_components.push_back(height_tag);
-          image_components.push_back(width_tag);
-          image_components.push_back(data_tag);
+
+          image_components.push_back(name);
+          image_components.push_back(height);
+          image_components.push_back(width);
+          image_components.push_back(data);
 
           parsed_data.push_back(image_components);
         }
 
       } else {
         right_bracket_of_opening_tag_position = index;
-        opening_tag_lbracket_position = tag_begin_index;
+
         stack.push(tag);
       }
     }
@@ -90,16 +84,14 @@ bool Parser::match(const std::string& opening_tag,
   std::string opening_tag_text = std::regex_replace(opening_tag, reg, "");
   std::string closing_tag_text = std::regex_replace(closing_tag, reg, "");
 
-  bool match = opening_tag_text.compare(closing_tag_text);
-
-  return match == 0;
+  return opening_tag_text.compare(closing_tag_text) == 0;
 }
 
 std::string Parser::get_substr(std::size_t start, std::size_t finish) {
   return content.substr(start, finish - start + 1);
 }
 
-std::vector<std::vector<std::string>> Parser::get_parsed_data(void) {
+std::vector<std::vector<std::string>> Parser::get_parsed_data(void) const {
   return parsed_data;
 }
 

@@ -45,24 +45,57 @@ class Matrix {
    */
   void populate(const std::string& content);
 
+  //! Getter Linhas
+  /*!
+     Getter do número de linhas da matriz.
+
+     \return Número de linhas da matriz (std::size_t).
+   */
+  std::size_t rows(void) const;
+
+  //! Getter Colunas
+  /*!
+     Getter do número de colunas da matriz.
+
+     \return Número de colunas da matriz (std::size_t).
+   */
+  std::size_t columns(void) const;
+
+  //! Sobrecarga do operador ()
+  /*!
+     Retorna o elemento no índice (row, column) da matriz.
+
+     \param row: Linha (std::size_t).
+     \param column: Coluna (std::size_t).
+
+     \return Elemento na posição (row, column), inteiro.
+   */
+  int operator()(std::size_t row, std::size_t column) const;
+
+
+  int& operator()(std::size_t row, std::size_t column);
+
+
+ private:
   //! Linhas
   /*!
      Número de linhas da matriz. Tipo inteiro sem sinal size_t.
    */
   std::size_t rows_;
+
   //! Colunas
   /*!
      Altura da matrix. Tipo inteiro sem sinal size_t.
    */
   std::size_t columns_;
 
- //private:
   //! Matriz
   /*!
      Matriz bidimensional de números inteiros. Pointeiro para ponteiro para
      inteiros (int **).
    */
-  int** matrix;
+  int** data_;
+
 };
 
 #endif
