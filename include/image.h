@@ -18,13 +18,37 @@ class Image {
    */
   Image(std::vector<std::string> tags);
 
-  std::string name(void) const { return name_; }
+  //! Getter Nome
+  /*!
+     Getter do atributo privado name_.
 
-  std::size_t height(void) const { return height_; }
+     \return Nome da imagem (std::string).
+   */
+  std::string name(void) const;
 
-  std::size_t width(void) const { return width_; }
+  //! Getter Altura
+  /*!
+     Getter do atributo privado height_.
 
-  std::string data(void) const { return data_; }
+     \return Altura da imagem (std::size_t).
+   */
+  std::size_t height(void) const;
+
+  //! Getter Largura
+  /*!
+     Getter do atributo privado width_.
+
+     \return Largura da imagem (std::size_t).
+   */
+  std::size_t width(void) const;
+
+  //! Getter Dados
+  /*!
+     Getter do atributo privado data_.
+
+     \return Dados da imagem (std::string).
+   */
+  std::string data(void) const;
 
  private:
   //! Nome.
