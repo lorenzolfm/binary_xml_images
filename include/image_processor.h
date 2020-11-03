@@ -1,9 +1,7 @@
 #ifndef IMAGE_PROCESSOR_H
 #define IMAGE_PROCESSOR_H
 
-#include "image.h"
 #include "matrix.h"
-#include "parser.h"
 
 //! Classe Processador De Imagens
 /*!
@@ -45,6 +43,7 @@ class ImageProcessor {
      componentes conexos é igual ao último e maior rótulo atribuído.
    */
   Matrix R;
+
   //! Matrix E
   /*!
      Matriz populada com os pixels da imagem, de tipo Matrix. Usada na contagem

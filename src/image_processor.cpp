@@ -1,7 +1,6 @@
 #include "image_processor.h"
 
 #include <utility>
-#include <iostream>
 
 #include "linked_queue.h"
 
@@ -19,21 +18,21 @@ void ImageProcessor::count_connected_components(void) {
 
   for (std::size_t row{0}; row < E.rows_; row++) {
     for (std::size_t column{0}; column < E.columns_; column++) {
-
-      if(E.matrix[row][column] && !R.matrix[row][column]) {
+      if (E.matrix[row][column] && !R.matrix[row][column]) {
         R.matrix[row][column] = label;
         paths.enqueue({column, row});
 
-        while(!paths.empty()) {
+        while (!paths.empty()) {
           std::pair<int, int> pair = paths.dequeue();
           int x = pair.first;
           int y = pair.second;
 
-          if ((x - 1 >= 0) && (!R.matrix[y][x-1] && E.matrix[y][x-1])) {
+          if ((x - 1 >= 0) && (!R.matrix[y][x - 1] && E.matrix[y][x - 1])) {
             R.matrix[y][x - 1] = label;
             paths.enqueue({x - 1, y});
           }
-          if ((x + 1 < E.columns_) && (!R.matrix[y][x + 1] && E.matrix[y][x + 1])) {
+          if ((x + 1 < E.columns_) &&
+              (!R.matrix[y][x + 1] && E.matrix[y][x + 1])) {
             R.matrix[y][x + 1] = label;
             paths.enqueue({x + 1, y});
           }
@@ -41,7 +40,8 @@ void ImageProcessor::count_connected_components(void) {
             R.matrix[y - 1][x] = label;
             paths.enqueue({x, y - 1});
           }
-          if ((y + 1 < E.rows_) && (!R.matrix[y + 1][x] && E.matrix[y + 1][x])) {
+          if ((y + 1 < E.rows_) &&
+              (!R.matrix[y + 1][x] && E.matrix[y + 1][x])) {
             R.matrix[y + 1][x] = label;
             paths.enqueue({x, y + 1});
           }
