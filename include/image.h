@@ -5,6 +5,10 @@
 #include <string>
 #include <vector>
 
+//! Classe Imagem
+/*!
+   Representa a imagem do XML. Possui nome, altura, largura e dados.
+ */
 class Image {
  public:
   //! Construtor
