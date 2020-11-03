@@ -43,3 +43,7 @@ void Matrix::populate(const std::string& content) {
     }
   }
 }
+
+std::size_t Matrix::rows(void) const { return rows_; }
+
+std::size_t Matrix::columns(void) const { return columns_; }
