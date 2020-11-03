@@ -69,7 +69,7 @@ class Parser {
 
      \return Vetor de vetor de strings, contendo o conteúdo parseado em parse.
    */
-  std::vector<std::vector<std::string>> get_parsed_data(void);
+  std::vector<std::vector<std::string>> get_parsed_data(void) const;
 
  private:
   //! Getter Substring
