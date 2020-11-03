@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdexcept>
 #include <fstream>
 #include <sstream>
 
@@ -83,8 +83,8 @@ class MatrixTest : public ::testing::Test {
 };
 
 TEST_F(MatrixTest, RowsAndColumnsAttributesAsExpectedAfterInitializing) {
-  ASSERT_EQ(matrix.rows_, rows);
-  ASSERT_EQ(matrix.columns_, columns);
+  ASSERT_EQ(matrix.rows(), rows);
+  ASSERT_EQ(matrix.columns(), columns);
 }
 
 TEST_F(MatrixTest, MatrixHasOnlyZerosAfterInitialization) {
@@ -108,6 +108,19 @@ TEST_F(MatrixTest, PopulatesSuccessfully) {
       }
     }
   }
+}
+
+TEST_F(MatrixTest, OperatorOverload) {
+  std::string data = "1010\n1010\n1010\n1010\n";
+  matrix.populate(data);
+
+  ASSERT_EQ(matrix(0, 0), 1);
+  ASSERT_EQ(matrix(0, 1), 0);
+}
+
+TEST_F(MatrixTest, OperatorOverloadOutOfBounds) {
+  ASSERT_THROW(matrix(4, 0), std::out_of_range);
+  ASSERT_THROW(matrix(0, 4), std::out_of_range);
 }
 
 class LinkedStackTest : public ::testing::Test {
