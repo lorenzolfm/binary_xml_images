@@ -11,7 +11,11 @@
  */
 class Parser {
  public:
-  // TODO: DOC
+  //! Construtor
+  /*!
+     Inicializa um objeto da classe construtor, com o atributo content
+     inicializado como uma string vazia.
+   */
   Parser(void);
 
   //! Construtor
@@ -50,9 +54,23 @@ class Parser {
    */
   bool match(const std::string& opening_tag, const std::string& closing_tag);
 
+  //! Setter Conteúdo
+  /*!
+     Atribui ao atributo content a string passada como argumento.
+
+     \param xml_content: String representando o conteúdo do XML.
+   */
   void set_content(std::string xml_content);
 
+  //! Getter Dados "Parseados"
+  /*!
+     Getter dos dados parseados pelo método parse. Retorna um vetor de vetor de
+     strings. Cada string contém um campo do XML parseado.
+
+     \return Vetor de vetor de strings, contendo o conteúdo parseado em parse.
+   */
   std::vector<std::vector<std::string>> get_parsed_data(void);
+
  private:
   //! Getter Substring
   /*!
