@@ -90,7 +90,7 @@ TEST_F(MatrixTest, RowsAndColumnsAttributesAsExpectedAfterInitializing) {
 TEST_F(MatrixTest, MatrixHasOnlyZerosAfterInitialization) {
   for (auto i{0}; i < rows; i++) {
     for (auto j{0}; j < columns; j++) {
-      ASSERT_EQ(matrix.matrix[i][j], 0);
+      ASSERT_EQ(matrix(i, j), 0);
     }
   }
 }
@@ -108,6 +108,12 @@ TEST_F(MatrixTest, PopulatesSuccessfully) {
       }
     }
   }
+}
+
+TEST_F(MatrixTest, OperatorOverloadLHS) {
+  matrix(0, 0) = 2;
+
+  ASSERT_EQ(matrix(0, 0), 2);
 }
 
 TEST_F(MatrixTest, OperatorOverload) {
