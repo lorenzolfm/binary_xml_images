@@ -32,6 +32,23 @@ class Parser {
   /*!
      Verifica o aninhamento e fechamento das tags e separa os elementos
      pertencentes a cada imagem.
+     Para este método é usada a estrutura de pilha encadeada, que suportará um
+     número váriável de tags.
+     Usando o conteúdo do XML que foi passado para o construtor da classe é
+     feita uma busca linha a linha, caracter a caracter pelos caracteres '<' e '>'
+     Quando um caracter '<' é encontrado, é iniciada a busca pelo caracter '>'.
+     Uma vez encontrado o caracter '>', é criada uma nova string para alocar a
+     tag. Se o segundo caracter da nova string for diferente de uma '/', então 
+     é convencionado que temos uma tag de abertura, i.e: <name>, e finalmente
+     adicionamos essa tag à pilha. Porém se o segundo caracter da string
+     for uma '/', temos uma tag de fechamento, então é chamado o método desempilha
+     que compara o conteúdo da tag de abertura com a de fechamento. Sendo os
+     conteúdos iguais, o processo se repete comparando todas as tags restantes
+     mas se conteúdos diferentes forem encontrados o metodo retorna false e 
+     interrompe as buscas, uma vez que o arquivo não é mais válido.
+     Ainda nesse loop, se as tags de abertura e fechamento são equivalentes,
+     buscamos o conteúdo que se encontra entre elas e os registramos em um array
+     para mais tarde ser feita a análise dos componentes conexos.
 
      \return true: Se o aninhamento e fechamento das tags está correto.
      \return false: Se o aninhamento ou fechamento das tags está incorreto.
