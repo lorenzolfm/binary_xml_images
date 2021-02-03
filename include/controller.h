@@ -1,3 +1,10 @@
+//! Trabalho 1 - Estruturas de Dados -
+//! https://github.com/iankressin/binary-xml-images.
+/*!
+ * \author Lorenzo Lima Franco Maturano - 19100535.
+ * \author Ian Guimarães Kressin - 14200735.
+ */
+
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
